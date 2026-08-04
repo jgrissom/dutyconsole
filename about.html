@@ -85,6 +85,23 @@
   </section>
 
   <section>
+    <h2>The clock, and why the numbers look odd</h2>
+    <div class="body prose">
+      <p>
+        Haldane keeps <strong>UTC+5</strong>, which is what the real stations at that
+        longitude do. Every time on the board is 24-hour — <span class="tag">14:20</span>
+        is twenty past two in the afternoon, and the comms window at
+        <span class="tag">21:00</span> is nine in the evening. Nobody at a research
+        station writes <em>9&nbsp;PM</em>; too much depends on not misreading it.
+      </p>
+      <p id="offset">
+        Right now the station is <strong><span id="gap">…</span></strong> — which is
+        roughly the point. It is a long way from anywhere, including from you.
+      </p>
+    </div>
+  </section>
+
+  <section>
     <h2>Why the board keeps changing</h2>
     <div class="body prose">
       <p>
@@ -119,6 +136,41 @@
   <footer>
     <a href="/">← back to the duty console</a>
   </footer>
+
+<script>
+/* How far ahead of the reader the station is, worked out from their own clock.
+ *
+ * This page is the ONLY place that addresses the reader directly, which is why
+ * the calculation lives here and the boards just say "UTC+5". Reading it live
+ * also gets daylight saving right for free — the gap is 10 hours from US
+ * Central in summer and 11 in winter, and nothing has to be updated for that.
+ *
+ * Half-hour and 45-minute zones exist (India is UTC+5:30, Nepal +5:45), so the
+ * minutes are kept rather than assumed away.
+ */
+(function () {
+  var el = document.getElementById('gap');
+  if (!el) return;
+
+  var STATION_MIN = 5 * 60;                       // UTC+5, in minutes
+  var readerMin = -new Date().getTimezoneOffset(); // JS reports this inverted
+  var diff = STATION_MIN - readerMin;
+
+  if (diff === 0) { el.textContent = 'on the same clock as you'; return; }
+
+  var ahead = diff > 0;
+  var mins = Math.abs(diff);
+  var h = Math.floor(mins / 60);
+  var m = mins % 60;
+
+  // "0 hours 30 minutes" is how a machine says it. Drop an empty hours part —
+  // the half-hour zones (India +5:30, Nepal +5:45) are the ones that hit this.
+  var text = '';
+  if (h) text = h + (h === 1 ? ' hour' : ' hours');
+  if (m) text += (text ? ' ' : '') + m + ' minutes';
+  el.textContent = text + (ahead ? ' ahead of you' : ' behind you');
+})();
+</script>
 
 </div>
 </body>
