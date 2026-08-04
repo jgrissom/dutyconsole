@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HALDANE STATION · DUTY CONSOLE</title>
+<style>
+  body{
+    margin:0;min-height:100vh;background:#0b0d0e;color:#6c7b78;
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;
+    display:flex;align-items:center;justify-content:center;padding:24px;text-align:center;
+  }
+  a{color:#7fb2d4;display:inline-block;margin:.3rem .6rem}
+  .amber{color:#e8b04b}
+</style>
+</head>
+<body>
+  <div>
+    <div class="amber">HALDANE STATION</div>
+    <div>opening the board&hellip;</div>
+    <noscript>
+      <p>Script is off. Pick a board:</p>
+      <p id="all"></p>
+      <p>
+        <a href="week-03.html">week 03</a><a href="week-04.html">04</a><a href="week-05.html">05</a><a href="week-06.html">06</a><a href="week-07.html">07</a><a href="week-08.html">08</a><a href="week-09.html">09</a><a href="week-10.html">10</a><a href="week-11.html">11</a><a href="week-12.html">12</a><a href="week-13.html">13</a><a href="week-14.html">14</a><a href="week-15.html">15</a><a href="week-16.html">16</a>
+      </p>
+    </noscript>
+  </div>
+
+<script>
+/* Which board is current?
+ *
+ * Week 1 is the week of Monday 17 August 2026. The class weekday is Mon/Tue/Wed
+ * and unsettled, so this anchors on MONDAY — the earliest it can be — and the
+ * board turns over at local midnight on Monday. Early is the safe direction:
+ * a week has to be rehearsal-ready before the Monday anyway.
+ *
+ * The site debuts in week 3, so anything earlier clamps to 3, and anything past
+ * the end of term clamps to 16.
+ *
+ * Rehearsal override: ?week=7 shows week 7's board on any date. That is the
+ * supported way to look ahead — do not change the anchor to preview a week.
+ */
+var FIRST = 3, LAST = 16;
+var START = new Date(2026, 7, 17);           // month is 0-indexed: 7 = August
+
+function currentWeek() {
+  var q = new URLSearchParams(location.search).get('week');
+  if (q !== null) {
+    var forced = parseInt(q, 10);
+    if (!isNaN(forced)) return clamp(forced);
+  }
+  var now = new Date();
+  var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  // round, not floor — a DST shift moves the raw millisecond gap by an hour
+  var days = Math.round((today - START) / 86400000);
+  return clamp(Math.floor(days / 7) + 1);
+}
+
+function clamp(n) { return Math.min(LAST, Math.max(FIRST, n)); }
+
+var n = String(currentWeek()).padStart(2, '0');
+location.replace('week-' + n + '.html');     // replace, so Back doesn't bounce here
+</script>
+</body>
+</html>
