@@ -12,6 +12,7 @@ The in-fiction intranet for **Haldane Station**, the demonstration world of a co
 
 ```
 index.html      router — picks the current week by date and redirects
+about.html      the only page that steps outside the fiction
 404.html        safety net — walks down to the last board that exists
 board.css       shared styling for every board
 board.js        the station clock
@@ -81,6 +82,24 @@ cost that quietly gets dropped by week 6.
 
 The archive is worth keeping: pulling up week 3's board in week 10 shows the same
 station with a tenth of the data — the course's persistence arc, visible.
+
+### about.html — the one page allowed to explain
+
+Linked from every board's footer, and **the reason the boards themselves never have to
+explain anything.** A student who doesn't get it needs a door; without one the only
+options are a confused student or exposition on the console.
+
+It covers: the station is invented, why a terminal is the setting rather than a
+limitation, who the Haldanes were, why the board grows, and — stated plainly — that
+**nothing here is graded, submitted, or a hint.**
+
+⚠️ **It is written for students, not as a design document.** Students read this page.
+Keep out anything that spends a moment the course hasn't spent yet: the deliberate
+breaks, why a given panel arrives in the week it does, what the checks turn into, and
+anything about the lab's world. If it would land better as a surprise in class, it does
+not belong here.
+
+No clock on it — the clock belongs to the console.
 
 ### The icon
 

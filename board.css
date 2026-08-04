@@ -77,5 +77,11 @@ tr:last-child td{border-bottom:none}
 .log .t{flex:0 0 auto;min-width:9.5em}
 
 ul{margin:0;padding-left:1.1rem} li{margin:.32rem 0}
+
+/* about.html only — the one page allowed to step outside the fiction. Keep it
+ * off the boards: the console explains itself or it isn't working. */
+.prose p{margin:0 0 .9rem;max-width:62ch}
+.prose p:last-child{margin-bottom:0}
+.prose strong{color:var(--fg)}
 footer{color:var(--dim);font-size:.74rem;margin:22px 0 8px;line-height:1.7}
 a{color:var(--cold)}
