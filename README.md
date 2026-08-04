@@ -19,8 +19,20 @@ board.js        the station clock
 favicon.svg     amber H on the board's dark panel; PNG fallbacks beside it
 week-01.html    the board as it stood in week 1
 week-NN.html    … one per week, 01 through 16
-CNAME           dutyconsole.com
+CNAME           dutyconsole.com  ← DO NOT DELETE, see below
 ```
+
+> ⚠️ **`CNAME` is not a DNS record, and it is load-bearing.** It is GitHub Pages' own
+> convention for *"this site's domain is…"*, read on every build. **Delete it and the
+> next build drops `dutyconsole.com`**, taking the certificate with it.
+>
+> It is unrelated to the `CNAME` **record type** in DNS — which cannot sit at a root
+> domain, which is exactly why the apex here uses A records. Same word, different
+> things, and the collision is GitHub's fault rather than yours.
+>
+> GitHub also **rewrites this file itself** whenever the custom domain is changed in
+> Pages settings. That is where any surprising `Create CNAME` / `Delete CNAME` commits
+> in the history come from — and why a `git pull` may be needed before your next push.
 
 **Every board is a strict superset of the one before**, and that is the whole idea:
 the console fills up as the students' program does. Week 1 is the six values week 1's
