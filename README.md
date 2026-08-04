@@ -80,6 +80,13 @@ failed path, so a 404 at `/some/nonsense` would send a visitor to
 weekly chore during a semester that is also being taught and graded is the kind of
 cost that quietly gets dropped by week 6.
 
+⭐ **`week-11.html` is the one exception — it is written *after* its session.** Week 11
+is the shared-table night, when every terminal in the room writes to one duty log, and
+that board is a **curated snapshot of what the class actually wrote**. Curated, because
+it is student-typed text and nothing reaches this site unreviewed. A live API serving
+the real log was considered and declined for exactly that reason, among others — see
+`CLAUDE.md`, *The shared-table payoff*.
+
 The archive is worth keeping: pulling up week 3's board in week 10 shows the same
 station with a tenth of the data — the course's persistence arc, visible.
 
