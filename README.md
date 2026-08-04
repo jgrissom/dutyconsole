@@ -47,13 +47,30 @@ seventh here.** Searching for someone who hasn't returned is deliberately not on
 `index.html` runs a few lines of JS: it works out the current week from the date and
 `location.replace()`s to that week's file.
 
-- **Week 1 is the week of Monday 17 August 2026.** The anchor is the **Monday** — the
-  class weekday is Mon/Tue/Wed and unsettled, so the board turns over at the earliest
-  possible moment. Early is the safe direction.
-- Anything before the start of term clamps to `week-01.html`; anything past the end
-  clamps to `week-16.html`.
-- **`?week=7` forces any board on any date.** That is the supported way to rehearse
-  ahead — *never move the anchor to preview a week.*
+- **Terms are a list**, so the site survives being reused. Add one line per semester
+  and **never edit a term that has already run** — its start date is what "week 5"
+  meant to the people who were there.
+- The anchor is each term's **Monday**. The class weekday is Mon/Tue/Wed and unsettled,
+  so the board turns over at the earliest moment it could be needed. Early is safe.
+- **`LATEST` is the highest board that actually exists.** Bump it in the same commit
+  that adds one, or the router points at a file that was never written.
+- **`short: true`** on a term marks a 15-week run: week 15 is the droppable flex week
+  and week 16 must work as week 15, so calendar week 15 shows board 16.
+- Before a term starts it clamps to `week-01.html`; after one ends it holds at the last
+  board until the next term's Monday.
+- **`?week=7` forces any board on any date**, ignoring `LATEST`. That is the supported
+  way to rehearse ahead — *never move an anchor to preview a week.*
+
+### Nothing missing is ever visible
+
+`404.html` is the safety net for a forgotten `LATEST`. GitHub Pages serves it for any
+unmatched path, and it **walks down** — a missing `week-07.html` tries 06, then 05, and
+so on until it finds a board that exists. It terminates by construction, and it never
+retries the page that just failed.
+
+⚠️ **Its redirects are root-absolute on purpose.** A relative one resolves against the
+failed path, so a 404 at `/some/nonsense` would send a visitor to
+`/some/week-01.html` — which 404s in turn. That was a real bug, caught in testing.
 
 **Each week's board is written when that week is built**, not live during term. A
 weekly chore during a semester that is also being taught and graded is the kind of
@@ -102,4 +119,12 @@ hour). The `CNAME` file in this repo holds the same value.
    station, further along — **more data, more durable**, no plot. Nothing may require
    the previous week's fiction to be remembered.
 3. Update the HTML comment at the top saying what this week added and why.
-4. Commit and push. `index.html` picks it up on the right Monday; nothing else to do.
+4. ⚠️ **Bump `LATEST` in `index.html`** to the week you just added. This is the one
+   step that is easy to forget and the whole reason `404.html` exists.
+5. Commit and push. `index.html` picks it up on the right Monday; nothing else to do.
+
+**Every panel carries a `logged HH:MM` stamp**, and the header carries a live clock.
+That contrast is deliberate: the clock is the only live thing on the console, and
+everything else is a reading somebody wrote down at a watch change. It is what makes
+the board's staleness read as designed — including week 3, where the sign-out board is
+`as at 14:57` and the log at 14:58 says Reyes is already back.

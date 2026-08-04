@@ -29,7 +29,12 @@ section{border:1px solid var(--line);background:var(--panel);margin-top:14px}
 h2{
   font-size:.74rem;letter-spacing:.18em;color:var(--dim);font-weight:600;
   margin:0;padding:8px 16px;border-bottom:1px solid var(--line);text-transform:uppercase;
+  display:flex;justify-content:space-between;align-items:baseline;gap:1rem;flex-wrap:wrap;
 }
+/* When a panel was last written down by hand. The clock in the header is the
+ * only live thing on this console; everything else is a logged reading, and
+ * saying so is what makes the staleness deliberate rather than neglected. */
+.logged{text-transform:none;letter-spacing:.04em;font-weight:400;opacity:.75}
 .body{padding:12px 16px}
 
 /* Cell counts are always a multiple of 2 and 3, so a row never strands one

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HALDANE STATION · DUTY CONSOLE</title>
+<style>
+  body{
+    margin:0;min-height:100vh;background:#0b0d0e;color:#6c7b78;
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;
+    display:flex;align-items:center;justify-content:center;padding:24px;text-align:center;
+  }
+  a{color:#7fb2d4} .amber{color:#e8b04b}
+</style>
+</head>
+<body>
+  <div>
+    <div class="amber">HALDANE STATION</div>
+    <div id="msg">no board for that week &mdash; finding the last one&hellip;</div>
+    <p><a href="/week-01.html">go to the first board</a></p>
+  </div>
+
+<script>
+/* GitHub Pages serves this for any path it cannot match.
+ *
+ * Its whole job is that a MISSING BOARD IS NEVER VISIBLE. If index.html's
+ * LATEST is ever left behind when a week rolls over, the router points at a
+ * week-NN.html that was never written — and without this page a student
+ * standing in front of a projector would get GitHub's 404.
+ *
+ * So: walk DOWN. /week-07.html missing -> try week-06 -> week-05 -> ... Each
+ * miss lands back here one number lower, so it terminates on the first board
+ * that exists, and at worst on week-01.html.
+ *
+ * ⚠️ The guard matters: if the request was ALREADY week-01.html, do not
+ * redirect to week-01.html — that is the page that just 404'd, and it would
+ * loop forever. Stop and say so instead.
+ */
+/* ⚠️ Every redirect here is ROOT-ABSOLUTE ("/week-03.html", not
+ * "week-03.html"). A relative one resolves against the failed path, so a 404
+ * at /some/nonsense would send the visitor to /some/week-01.html — which 404s
+ * in turn. Caught in testing; it terminated safely but landed on this error
+ * page instead of a board. */
+(function () {
+  var m = location.pathname.match(/week-(\d+)\.html$/);
+  var n = m ? parseInt(m[1], 10) : null;
+
+  if (n === null) { location.replace('/'); return; }   // some other path — let the router decide
+  if (n <= 1) {                                        // nothing below it; do not retry week-01
+    document.getElementById('msg').textContent =
+      'The board is not here. Nothing is wrong at the station.';
+    return;
+  }
+  location.replace('/week-' + String(n - 1).padStart(2, '0') + '.html');
+})();
+</script>
+</body>
+</html>

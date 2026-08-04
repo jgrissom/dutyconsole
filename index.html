@@ -20,7 +20,6 @@
     <div>opening the board&hellip;</div>
     <noscript>
       <p>Script is off. Pick a board:</p>
-      <p id="all"></p>
       <p>
         <a href="week-01.html">week 01</a><a href="week-02.html">02</a><a href="week-03.html">03</a><a href="week-04.html">04</a><a href="week-05.html">05</a><a href="week-06.html">06</a><a href="week-07.html">07</a><a href="week-08.html">08</a><a href="week-09.html">09</a><a href="week-10.html">10</a><a href="week-11.html">11</a><a href="week-12.html">12</a><a href="week-13.html">13</a><a href="week-14.html">14</a><a href="week-15.html">15</a><a href="week-16.html">16</a>
       </p>
@@ -30,41 +29,62 @@
 <script>
 /* Which board is current?
  *
- * Week 1 is the week of Monday 17 August 2026. The class weekday is Mon/Tue/Wed
- * and unsettled, so this anchors on MONDAY — the earliest it can be — and the
- * board turns over at local midnight on Monday. Early is the safe direction:
- * a week has to be rehearsal-ready before the Monday anyway.
+ * Computed in the visitor's browser on every load — there is no server, no
+ * build and no scheduled job. Push a file and it is live.
  *
- * The board runs from week 1, so anything earlier clamps to 1, and anything past
- * the end of term clamps to 16. Each week's board is a strict SUPERSET of the
- * one before — week 1 is the six values week 1's demo computes and nothing more,
- * and panels arrive in the week the course earns them. The board fills up as
- * their program does; that is the whole idea, so never backfill a later panel
- * into an earlier week.
+ * ── THE TWO THINGS TO EDIT ────────────────────────────────────────────────
+ *   TERMS   add one line per semester. Never edit a term that has already run:
+ *           its start date is what "week 5" meant for the people who were there.
+ *   LATEST  the highest week-NN.html that actually EXISTS. Bump it in the same
+ *           commit that adds a board, or the router points at a 404.
+ * ──────────────────────────────────────────────────────────────────────────
  *
- * Rehearsal override: ?week=7 shows week 7's board on any date. That is the
- * supported way to look ahead — do not change the anchor to preview a week.
+ * Anchor each term on its MONDAY. The class weekday is Mon/Tue/Wed and has
+ * never been settled, so the board turns over at the earliest moment it could
+ * be needed — a week has to be rehearsal-ready before the Monday anyway.
+ *
+ * Rehearsal override: ?week=7 shows any board on any date, and ignores LATEST
+ * so an unwritten week can be previewed as a 404 rather than silently hidden.
+ * That is the supported way to look ahead — never move an anchor to preview.
  */
-var FIRST = 1, LAST = 16;
-var START = new Date(2026, 7, 17);           // month is 0-indexed: 7 = August
 
-function currentWeek() {
+var TERMS = [
+  { start: new Date(2026, 7, 17) },        // Mon 17 Aug 2026 — first run, 16 weeks
+  // { start: new Date(2027, 0, 11), short: true },   // a 15-week run: see below
+];
+
+var LATEST = 3;                            // boards written so far
+var LAST = 16;                             // weeks in a full term
+
+/* `short: true` marks a 15-week semester. Week 15 is the droppable flex week
+ * and week 16 must work as week 15 — so in a short run, calendar week 15 shows
+ * board 16 (the presentations board) and week 15's board is simply not used. */
+
+function boardFor(now) {
   var q = new URLSearchParams(location.search).get('week');
   if (q !== null) {
     var forced = parseInt(q, 10);
-    if (!isNaN(forced)) return clamp(forced);
+    if (!isNaN(forced)) return Math.min(LAST, Math.max(1, forced));   // ignores LATEST
   }
-  var now = new Date();
+
   var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+  // the most recent term that has already started; before the first, use the first
+  var term = TERMS[0];
+  for (var i = 0; i < TERMS.length; i++) {
+    if (TERMS[i].start <= today) term = TERMS[i];
+  }
+
   // round, not floor — a DST shift moves the raw millisecond gap by an hour
-  var days = Math.round((today - START) / 86400000);
-  return clamp(Math.floor(days / 7) + 1);
+  var days = Math.round((today - term.start) / 86400000);
+  var wk = Math.floor(days / 7) + 1;
+
+  if (term.short && wk >= 15) wk = 16;     // 15-week run: wk 15 is the presentations
+  return Math.min(LATEST, Math.min(LAST, Math.max(1, wk)));
 }
 
-function clamp(n) { return Math.min(LAST, Math.max(FIRST, n)); }
-
-var n = String(currentWeek()).padStart(2, '0');
-location.replace('week-' + n + '.html');     // replace, so Back doesn't bounce here
+var n = String(boardFor(new Date())).padStart(2, '0');
+location.replace('week-' + n + '.html');   // replace, so Back doesn't bounce here
 </script>
 </body>
 </html>
