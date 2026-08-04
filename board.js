@@ -26,10 +26,15 @@
 
   function pad(n) { return n < 10 ? '0' + n : String(n); }
 
+  // The colons are their own spans so CSS can blink them at 1Hz — that is what
+  // reads as "running" from the back of a room. Only generated digits go in
+  // here, never anything from the page or the URL.
+  var SEP = '<span class="sep">:</span>';
+
   function tick() {
     var t = new Date(Date.now() + OFFSET_HOURS * 3600000);
-    el.textContent =
-      pad(t.getUTCHours()) + ':' + pad(t.getUTCMinutes()) + ':' + pad(t.getUTCSeconds());
+    el.innerHTML =
+      pad(t.getUTCHours()) + SEP + pad(t.getUTCMinutes()) + SEP + pad(t.getUTCSeconds());
   }
 
   tick();

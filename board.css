@@ -35,6 +35,20 @@ h2{
  * only live thing on this console; everything else is a logged reading, and
  * saying so is what makes the staleness deliberate rather than neglected. */
 .logged{text-transform:none;letter-spacing:.04em;font-weight:400;opacity:.75}
+
+/* The station clock — the only live thing on the console, so it has to read as
+ * an instrument rather than as more header text.
+ *
+ * Deliberately NOT a new colour: amber is the title and `hours remaining`,
+ * blue is temperature, green and red are status. A coloured clock would either
+ * collide with one of those or read as an alert. It is lifted to normal
+ * foreground brightness instead, and the COLONS blink at 1Hz — which is what
+ * actually says "running" from the back of a room, where the digits are
+ * unreadable anyway and colour tells you nothing. */
+#clock{color:var(--fg);letter-spacing:.06em}
+#clock .sep{animation:blink 1s step-end infinite}
+@keyframes blink{50%{opacity:.2}}
+@media(prefers-reduced-motion:reduce){#clock .sep{animation:none}}
 .body{padding:12px 16px}
 
 /* Cell counts are always a multiple of 2 and 3, so a row never strands one
