@@ -12,7 +12,10 @@ The in-fiction intranet for **Haldane Station**, the demonstration world of a co
 
 ```
 index.html      router — picks the current week by date and redirects
+404.html        safety net — walks down to the last board that exists
 board.css       shared styling for every board
+board.js        the station clock
+favicon.svg     amber H on the board's dark panel; PNG fallbacks beside it
 week-01.html    the board as it stood in week 1
 week-NN.html    … one per week, 01 through 16
 CNAME           dutyconsole.com
@@ -78,6 +81,20 @@ cost that quietly gets dropped by week 6.
 
 The archive is worth keeping: pulling up week 3's board in week 10 shows the same
 station with a tenth of the data — the course's persistence arc, visible.
+
+### The icon
+
+An amber **H** on the board's dark panel, **drawn as plain rectangles rather than as
+text in a font** — a `<text>` favicon renders differently on every machine and can fall
+back to something unrecognisable. Rects are identical everywhere.
+
+⚠️ **It was designed at 16px, which is the only size that matters.** A version with the
+banner's `====` rules around the H looked much better at 64px and collapsed into an
+unreadable blob in an actual tab. If you redraw it, judge it in a browser tab, not on a
+canvas.
+
+`favicon.svg` is the real one; `favicon-32.png` and `apple-touch-icon.png` are fallbacks
+for older browsers and iOS, rendered from the same SVG.
 
 ## Hosting
 
