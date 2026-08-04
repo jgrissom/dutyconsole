@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HALDANE STATION · DUTY CONSOLE</title>
+<link rel="stylesheet" href="board.css">
+</head>
+<!--
+  WEEK 2 BOARD = week 1 + the generator panel.
+
+  The generator can appear now: week 1's `4300 / 800` break has been spent, so
+  a fuel countdown on screen no longer hands anybody the answer. The numbers
+  are a different watch's, not the demo's, so nothing on the board contradicts
+  what was typed in class.
+
+  Still no log and no sign-out board — those need `List<T>`, which is week 3.
+-->
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="rule">========================================</div>
+    <h1>HALDANE STATION — DUTY CONSOLE</h1>
+    <div class="sub">nearest neighbour: 512 km · winter crew · day 219</div>
+    <div class="rule">========================================</div>
+  </header>
+
+  <section>
+    <h2>Station status</h2>
+    <div class="grid">
+      <div class="cell"><div class="k">Station</div><div class="v">Haldane</div></div>
+      <div class="cell"><div class="k">On station</div><div class="v">12</div></div>
+      <div class="cell"><div class="k">Outside</div><div class="v cold">−39.8 °C</div></div>
+      <div class="cell"><div class="k">That is</div><div class="v cold">−39.6 °F</div></div>
+      <div class="cell"><div class="k">Blizzard warning</div><div class="v ok">FALSE</div></div>
+      <div class="cell"><div class="k">Safe to go out</div><div class="v ok">TRUE</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Generator</h2>
+    <div class="grid">
+      <div class="cell"><div class="k">Fuel in day tank</div><div class="v">2,700 L</div></div>
+      <div class="cell"><div class="k">Burn rate</div><div class="v">800 L/hr</div></div>
+      <div class="cell"><div class="k">Hours remaining</div><div class="v amber">3.375</div></div>
+    </div>
+    <div class="body sub">
+      Hours remaining is the tank divided by the burn rate and nothing else. It does not know about the weather,
+      it does not know the drums are full, and it has never once been rounded in anyone's favour.
+    </div>
+  </section>
+
+  <section>
+    <h2>Standing orders</h2>
+    <div class="body">
+      <ul>
+        <li><strong>Colder than −50 °C, or a blizzard warning standing: nobody goes out.</strong> Not for five minutes, not for a photograph.</li>
+        <li>Sign out. Say where. Say when you are back. Take the radio and <em>turn it on</em>.</li>
+        <li>Vents and exhaust intakes are checked every watch. A buried exhaust does not announce itself — it just fills the building.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    Haldane Station is not a real place. It is the demonstration world for a college .NET course, and everything
+    above is invented — the crew, the log, the weather. The station is named for the Haldanes, physiologists of
+    dangerous air, which is why the thing most likely to kill you here is a blocked exhaust rather than the cold.
+  </footer>
+
+</div>
+</body>
+</html>

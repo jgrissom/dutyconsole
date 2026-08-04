@@ -1,0 +1,62 @@
+/* Haldane Station duty console — shared board styling.
+ *
+ * One stylesheet for every week-NN.html. The boards differ by what they
+ * CONTAIN, never by how they look: it is the same console all term, and the
+ * point is watching it fill up. If you are tempted to restyle one week, you
+ * probably want a different panel on it instead.
+ */
+
+:root{
+  --bg:#0b0d0e; --panel:#111517; --line:#1e2529;
+  --fg:#c8d3cf; --dim:#6c7b78; --amber:#e8b04b; --cold:#7fb2d4;
+  --warn:#d4674a; --ok:#7fa86a;
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--bg); color:var(--fg);
+  font-family:var(--mono); font-size:15px; line-height:1.55;
+  padding:clamp(12px,3vw,32px);
+}
+.wrap{max-width:860px;margin:0 auto}
+
+header{border:1px solid var(--line);background:var(--panel);padding:14px 16px}
+.rule{color:var(--dim);white-space:pre;overflow:hidden;font-size:12px}
+h1{font-size:1.05rem;letter-spacing:.14em;margin:.4rem 0 .1rem;color:var(--amber);font-weight:600}
+.sub{color:var(--dim);font-size:.82rem;letter-spacing:.06em}
+
+section{border:1px solid var(--line);background:var(--panel);margin-top:14px}
+h2{
+  font-size:.74rem;letter-spacing:.18em;color:var(--dim);font-weight:600;
+  margin:0;padding:8px 16px;border-bottom:1px solid var(--line);text-transform:uppercase;
+}
+.body{padding:12px 16px}
+
+/* Cell counts are always a multiple of 2 and 3, so a row never strands one
+ * cell beside a gap. Never auto-fit here. */
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;background:var(--line)}
+@media(min-width:620px){.grid{grid-template-columns:repeat(3,1fr)}}
+.cell{background:var(--panel);padding:11px 16px}
+.k{color:var(--dim);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase}
+.v{font-size:1.22rem;margin-top:2px}
+.cold{color:var(--cold)} .amber{color:var(--amber)} .warn{color:var(--warn)} .ok{color:var(--ok)}
+
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.86rem;min-width:520px}
+th{
+  text-align:left;color:var(--dim);font-weight:600;font-size:.7rem;
+  letter-spacing:.12em;text-transform:uppercase;padding:0 14px 7px 0;border-bottom:1px solid var(--line)
+}
+td{padding:7px 14px 7px 0;border-bottom:1px solid #171c1f;vertical-align:top}
+tr:last-child td{border-bottom:none}
+.tag{color:var(--amber);white-space:nowrap}
+.t{color:var(--dim);white-space:nowrap}
+
+.log{font-size:.86rem}
+.log div{padding:5px 0;border-bottom:1px solid #171c1f;display:flex;gap:14px}
+.log div:last-child{border-bottom:none}
+.log .t{flex:0 0 auto;min-width:9.5em}
+
+ul{margin:0;padding-left:1.1rem} li{margin:.32rem 0}
+footer{color:var(--dim);font-size:.74rem;margin:22px 0 8px;line-height:1.7}
+a{color:var(--cold)}

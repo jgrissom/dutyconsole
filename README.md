@@ -12,10 +12,24 @@ The in-fiction intranet for **Haldane Station**, the demonstration world of a co
 
 ```
 index.html      router — picks the current week by date and redirects
-week-03.html    the board as it stood in week 3
-week-NN.html    … one per week, 03 through 16
+board.css       shared styling for every board
+week-01.html    the board as it stood in week 1
+week-NN.html    … one per week, 01 through 16
 CNAME           dutyconsole.com
 ```
+
+**Every board is a strict superset of the one before**, and that is the whole idea:
+the console fills up as the students' program does. Week 1 is the six values week 1's
+demo computes and nothing else. The generator arrives in week 2, the sign-out board
+and the log in week 3 — the week the course meets `List<T>` and the station can have
+things there are *many* of.
+
+⚠️ **Never backfill a later panel into an earlier week**, and never restyle one week:
+they differ by what they contain, not by how they look. It is the same console all term.
+
+⚠️ **No generator panel on week 1**, deliberately. Week 1's demo break is `4300 / 800`
+printing `5` instead of `5.375`, found in silence. A fuel countdown on the board as
+students walk in hands them the answer.
 
 ### The board is in-fiction and never explains itself
 
@@ -36,8 +50,8 @@ seventh here.** Searching for someone who hasn't returned is deliberately not on
 - **Week 1 is the week of Monday 17 August 2026.** The anchor is the **Monday** — the
   class weekday is Mon/Tue/Wed and unsettled, so the board turns over at the earliest
   possible moment. Early is the safe direction.
-- Anything before week 3 clamps to `week-03.html` (the site debuts in week 3);
-  anything past the end clamps to `week-16.html`.
+- Anything before the start of term clamps to `week-01.html`; anything past the end
+  clamps to `week-16.html`.
 - **`?week=7` forces any board on any date.** That is the supported way to rehearse
   ahead — *never move the anchor to preview a week.*
 
@@ -82,8 +96,10 @@ hour). The `CNAME` file in this repo holds the same value.
 
 ## Adding a week
 
-1. Copy the previous week's file to `week-NN.html`.
-2. Change the log, the board, and the numbers. Same station, further along — **more
-   data, more durable**, no plot. Nothing may require the previous week's fiction to
-   be remembered.
-3. Commit and push. `index.html` picks it up on the right Monday; nothing else to do.
+1. Copy the previous week's file to `week-NN.html`. **Start from the previous week so
+   the superset rule holds by construction** — never from an older one.
+2. Change the numbers and the log, and add whatever panel that week has earned. Same
+   station, further along — **more data, more durable**, no plot. Nothing may require
+   the previous week's fiction to be remembered.
+3. Update the HTML comment at the top saying what this week added and why.
+4. Commit and push. `index.html` picks it up on the right Monday; nothing else to do.

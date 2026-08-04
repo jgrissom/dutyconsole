@@ -4,85 +4,55 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>HALDANE STATION · DUTY CONSOLE</title>
-<style>
-  :root{
-    --bg:#0b0d0e; --panel:#111517; --line:#1e2529;
-    --fg:#c8d3cf; --dim:#6c7b78; --amber:#e8b04b; --cold:#7fb2d4;
-    --warn:#d4674a; --ok:#7fa86a;
-    --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
-  }
-  *{box-sizing:border-box}
-  body{
-    margin:0; background:var(--bg); color:var(--fg);
-    font-family:var(--mono); font-size:15px; line-height:1.55;
-    padding:clamp(12px,3vw,32px);
-  }
-  .wrap{max-width:860px;margin:0 auto}
-
-  header{border:1px solid var(--line);background:var(--panel);padding:14px 16px}
-  .rule{color:var(--dim);white-space:pre;overflow:hidden;font-size:12px}
-  h1{font-size:1.05rem;letter-spacing:.14em;margin:.4rem 0 .1rem;color:var(--amber);font-weight:600}
-  .sub{color:var(--dim);font-size:.82rem;letter-spacing:.06em}
-
-  section{border:1px solid var(--line);background:var(--panel);margin-top:14px}
-  h2{
-    font-size:.74rem;letter-spacing:.18em;color:var(--dim);font-weight:600;
-    margin:0;padding:8px 16px;border-bottom:1px solid var(--line);text-transform:uppercase;
-  }
-  .body{padding:12px 16px}
-
-  /* six cells, so 2 or 3 across — never auto-fit, which strands the last one on a row of its own */
-  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;background:var(--line)}
-  @media(min-width:620px){.grid{grid-template-columns:repeat(3,1fr)}}
-  .cell{background:var(--panel);padding:11px 16px}
-  .k{color:var(--dim);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase}
-  .v{font-size:1.22rem;margin-top:2px}
-  .cold{color:var(--cold)} .amber{color:var(--amber)} .warn{color:var(--warn)} .ok{color:var(--ok)}
-
-  .scroll{overflow-x:auto}
-  table{border-collapse:collapse;width:100%;font-size:.86rem;min-width:520px}
-  th{
-    text-align:left;color:var(--dim);font-weight:600;font-size:.7rem;
-    letter-spacing:.12em;text-transform:uppercase;padding:0 14px 7px 0;border-bottom:1px solid var(--line)
-  }
-  td{padding:7px 14px 7px 0;border-bottom:1px solid #171c1f;vertical-align:top}
-  tr:last-child td{border-bottom:none}
-  .tag{color:var(--amber);white-space:nowrap}
-  .t{color:var(--dim);white-space:nowrap}
-
-  .log{font-size:.86rem}
-  .log div{padding:5px 0;border-bottom:1px solid #171c1f;display:flex;gap:14px}
-  .log div:last-child{border-bottom:none}
-  .log .t{flex:0 0 auto;min-width:9.5em}
-
-  ul{margin:0;padding-left:1.1rem} li{margin:.32rem 0}
-  footer{color:var(--dim);font-size:.74rem;margin:22px 0 8px;line-height:1.7}
-  a{color:var(--cold)}
-</style>
+<link rel="stylesheet" href="board.css">
 </head>
+<!--
+  WEEK 3 BOARD = week 2 + the sign-out board, the log, and the crew.
+
+  This is the week the course meets `List<T>`, so it is the week the station
+  gets things there can be MANY of. Everything before this was a fixed set of
+  named values; a queue of people and a log of entries could not be built yet.
+
+  ⚠️ Sign-out reasons come from the closed list of six in CLAUDE.md — MET RUN,
+  DIG OUT, FUEL, FIELD, COMMS, WALK. Do not invent a seventh.
+
+  The board says Reyes is overdue; the log at 14:58 says Reyes is back. That
+  contradiction is deliberate — the board is kept by hand and the log is
+  current, and the note under the status panel tells you which to believe.
+  It is the whole premise delivered as stale data, with nobody in danger.
+-->
 <body>
 <div class="wrap">
 
   <header>
     <div class="rule">========================================</div>
     <h1>HALDANE STATION — DUTY CONSOLE</h1>
-    <div class="sub">nearest neighbour: 512 km · winter crew · terminal 1 of 1</div>
+    <div class="sub">nearest neighbour: 512 km · winter crew · day 226</div>
     <div class="rule">========================================</div>
   </header>
 
   <section>
     <h2>Station status</h2>
     <div class="grid">
+      <div class="cell"><div class="k">Station</div><div class="v">Haldane</div></div>
       <div class="cell"><div class="k">On station</div><div class="v">12</div></div>
       <div class="cell"><div class="k">Outside</div><div class="v cold">−41.5 °C</div></div>
-      <div class="cell"><div class="k">Wind</div><div class="v">31 kt ESE</div></div>
-      <div class="cell"><div class="k">Blizzard warning</div><div class="v warn">TRUE</div></div>
-      <div class="cell"><div class="k">Generator fuel</div><div class="v">2,700 L</div></div>
-      <div class="cell"><div class="k">Hours remaining</div><div class="v amber">3.375</div></div>
+      <div class="cell"><div class="k">That is</div><div class="v cold">−42.7 °F</div></div>
+      <div class="cell"><div class="k">Blizzard warning</div><div class="v ok">FALSE</div></div>
+      <div class="cell"><div class="k">Safe to go out</div><div class="v ok">TRUE</div></div>
     </div>
     <div class="body sub">
       Board is updated by hand at each watch change. If it disagrees with the instrument, believe the instrument
       and correct the board.
+    </div>
+  </section>
+
+  <section>
+    <h2>Generator</h2>
+    <div class="grid">
+      <div class="cell"><div class="k">Fuel in day tank</div><div class="v">2,700 L</div></div>
+      <div class="cell"><div class="k">Burn rate</div><div class="v">800 L/hr</div></div>
+      <div class="cell"><div class="k">Hours remaining</div><div class="v amber">3.375</div></div>
     </div>
   </section>
 
@@ -109,7 +79,7 @@
       <div><span class="t">14:20</span><span>Vent 3 drifted over again. Reyes out with the long shovel.</span></div>
       <div><span class="t">11:40</span><span>Nakamura reports the mess kettle is making the noise again.</span></div>
       <div><span class="t">10:22</span><span>Fuel line checked to the day tank. No ice in the filter. Lindqvist.</span></div>
-      <div><span class="t">08:15</span><span>Blizzard warning raised. Field work stood down for the day.</span></div>
+      <div><span class="t">08:15</span><span>Blizzard warning lifted overnight. Field work back on.</span></div>
       <div><span class="t">07:50</span><span>Snow stake 4 not readable. Buried or gone. Will look tomorrow.</span></div>
       <div><span class="t">02:30</span><span>Aurora, most of an hour, whole southern half. Six of us out on the step. Cold.</span></div>
       <div><span class="t">— prev —</span><span>Mast guy wire retensioned. Comms nominal since.</span></div>

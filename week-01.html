@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HALDANE STATION · DUTY CONSOLE</title>
+<link rel="stylesheet" href="board.css">
+</head>
+<!--
+  WEEK 1 BOARD — deliberately thin.
+
+  These six cells are EXACTLY what week 1's demo computes: stationName,
+  personnelOnStation, temperatureC, blizzardWarning, Conditions.Fahrenheit()
+  and Conditions.IsSafeToGoOut(). Nothing else. The board has to have room to
+  grow, and a complete board in week 1 has nowhere to go.
+
+  ⚠️ NO GENERATOR PANEL HERE, and that is not an oversight. Week 1's §5 break
+  is `4300 / 800` printing 5 instead of 5.375, discovered in silence. A fuel
+  countdown on the board as they walk in hands them the answer. The generator
+  arrives in week 2, once the break has been spent.
+-->
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="rule">========================================</div>
+    <h1>HALDANE STATION — DUTY CONSOLE</h1>
+    <div class="sub">nearest neighbour: 512 km · winter crew · day 212</div>
+    <div class="rule">========================================</div>
+  </header>
+
+  <section>
+    <h2>Station status</h2>
+    <div class="grid">
+      <div class="cell"><div class="k">Station</div><div class="v">Haldane</div></div>
+      <div class="cell"><div class="k">On station</div><div class="v">12</div></div>
+      <div class="cell"><div class="k">Outside</div><div class="v cold">−41.5 °C</div></div>
+      <div class="cell"><div class="k">That is</div><div class="v cold">−42.7 °F</div></div>
+      <div class="cell"><div class="k">Blizzard warning</div><div class="v warn">TRUE</div></div>
+      <div class="cell"><div class="k">Safe to go out</div><div class="v warn">FALSE</div></div>
+    </div>
+    <div class="body sub">
+      Board is updated by hand at each watch change. If it disagrees with the instrument, believe the instrument
+      and correct the board.
+    </div>
+  </section>
+
+  <section>
+    <h2>Standing orders</h2>
+    <div class="body">
+      <ul>
+        <li><strong>Colder than −50 °C, or a blizzard warning standing: nobody goes out.</strong> Not for five minutes, not for a photograph.</li>
+        <li>Sign out. Say where. Say when you are back. Take the radio and <em>turn it on</em>.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    Haldane Station is not a real place. It is the demonstration world for a college .NET course, and everything
+    above is invented — the crew, the log, the weather. The station is named for the Haldanes, physiologists of
+    dangerous air, which is why the thing most likely to kill you here is a blocked exhaust rather than the cold.
+  </footer>
+
+</div>
+</body>
+</html>
