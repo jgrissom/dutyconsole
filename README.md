@@ -166,10 +166,23 @@ Then in the repo: **Settings → Pages → Custom domain → `dutyconsole.com`**
 **Enforce HTTPS** once the certificate is issued (it can take a few minutes to an
 hour). The `CNAME` file in this repo holds the same value.
 
+## The header rules are 160 `=` on purpose
+
+⚠️ **Don't "tidy" them back to something that looks right in the source.** `.rule` is
+`white-space:pre; overflow:hidden`, so the run is meant to be **longer than the widest
+header and get clipped** — that is what makes it span the row at every viewport instead
+of stopping short on a desktop. At 860px wide and 12px monospace the header needs about
+115 characters; 160 leaves ~45 of slack so a different monospace fallback can't leave a
+gap. They carry `aria-hidden="true"` because they are decoration, and a screen reader
+reading 160 equals signs is not decoration.
+
+*(They were 40 until 2026-08-07, which stopped well short of the right-hand edge.)*
+
 ## Adding a week
 
 1. Copy the previous week's file to `week-NN.html`. **Start from the previous week so
-   the superset rule holds by construction** — never from an older one.
+   the superset rule holds by construction** — never from an older one. This is also how
+   the 160-character header rules propagate; don't retype them.
 2. Change the numbers and the log, and add whatever panel that week has earned. Same
    station, further along — **more data, more durable**, no plot. Nothing may require
    the previous week's fiction to be remembered.
