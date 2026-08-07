@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HALDANE STATION · DUTY CONSOLE</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="board.css">
+<script src="board.js" defer></script>
+</head>
+<!--
+  WEEK 4 BOARD = week 3 + amendments.
+
+  ⚠️ NO NEW PANEL. Week 4 teaches properties and `private set`, which is not a
+  new KIND of thing the station knows — it is a rule about how the things it
+  already knows are allowed to change. So the board gains no panel; the
+  sign-out table gains an AMENDED column and one line of standing orders.
+  That is the whole difference from week 3, and it is deliberate: a week that
+  gains nothing is fine, and a panel that was never earned breaks the only
+  thing this archive is for.
+
+  ⚠️ Sign-out reasons come from the closed list of six in CLAUDE.md — MET RUN,
+  DIG OUT, FUEL, FIELD, COMMS, WALK. Do not invent a seventh.
+
+  The board still contradicts the log on purpose, the same way week 3's did:
+  the board is kept by hand, the instrument wins, and the note under the
+  status panel says which to believe.
+-->
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="rule" aria-hidden="true">================================================================================================================================================================</div>
+    <h1>HALDANE STATION — DUTY CONSOLE</h1>
+    <div class="sub">nearest neighbour: 512 km · winter crew · day 233 · <span id="clock">--:--:--</span> station time (UTC+5)</div>
+    <div class="rule" aria-hidden="true">================================================================================================================================================================</div>
+  </header>
+
+  <section>
+    <h2>Station status <span class="logged">logged 14:40 · Moretti</span></h2>
+    <div class="grid">
+      <div class="cell"><div class="k">Station</div><div class="v">Haldane</div></div>
+      <div class="cell"><div class="k">On station</div><div class="v">12</div></div>
+      <div class="cell"><div class="k">Outside</div><div class="v cold">−39.0 °C</div></div>
+      <div class="cell"><div class="k">That is</div><div class="v cold">−38.2 °F</div></div>
+      <div class="cell"><div class="k">Blizzard warning</div><div class="v ok">FALSE</div></div>
+      <div class="cell"><div class="k">Safe to go out</div><div class="v ok">TRUE</div></div>
+    </div>
+    <div class="body sub">
+      Board is updated by hand at each watch change. If it disagrees with the instrument, believe the instrument
+      and correct the board.
+    </div>
+  </section>
+
+  <section>
+    <h2>Generator <span class="logged">logged 10:22 · Lindqvist</span></h2>
+    <div class="grid">
+      <div class="cell"><div class="k">Fuel in day tank</div><div class="v">4,100 L</div></div>
+      <div class="cell"><div class="k">Burn rate</div><div class="v">800 L/hr</div></div>
+      <div class="cell"><div class="k">Hours remaining</div><div class="v">5.125</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Signed out <span class="logged">board as at 14:57</span></h2>
+    <div class="body scroll">
+      <table>
+        <tr><th>Time</th><th>Name</th><th>Reason</th><th>Expected</th><th>Amended</th><th>Status</th></tr>
+        <tr><td class="t">14:20</td><td>Okonkwo</td><td class="tag">MET RUN</td><td class="t">15:00</td><td class="t">—</td><td class="ok">on time</td></tr>
+        <tr><td class="t">14:20</td><td>Reyes</td><td class="tag">DIG OUT</td><td class="t">15:15</td><td class="t">14:57 · Bhatt</td><td class="ok">on time</td></tr>
+        <tr><td class="t">09:05</td><td>Lindqvist</td><td class="tag">FUEL</td><td class="t">10:30</td><td class="t">—</td><td class="ok">back 10:22</td></tr>
+      </table>
+    </div>
+    <div class="body sub">
+      Nobody leaves the building without a line on this board. The line is not the paperwork — the line is the
+      reason anyone knows to go and look.
+      <br><br>
+      A return time may be amended by the duty officer and by nobody else, and the amendment is signed. Time out,
+      name and reason are what was written when the person left, and they are not amendable at all. If those are
+      wrong the line is void and a new one is written.
+    </div>
+  </section>
+
+  <section>
+    <h2>Log</h2>
+    <div class="body log">
+      <div><span class="t">15:11</span><span>Reyes back. Vent 3 clear, ice on the inner louvre chipped off.</span></div>
+      <div><span class="t">14:57</span><span>Reyes on the radio: vent worse than it looked, wants until 15:15. Board amended.</span></div>
+      <div><span class="t">14:20</span><span>Vent 3 drifted over again. Reyes out with the long shovel.</span></div>
+      <div><span class="t">11:40</span><span>Nakamura reports the mess kettle is making the noise again.</span></div>
+      <div><span class="t">10:22</span><span>Fuel line checked to the day tank. No ice in the filter. Lindqvist.</span></div>
+      <div><span class="t">08:15</span><span>Blizzard warning lifted overnight. Field work back on.</span></div>
+      <div><span class="t">07:50</span><span>Snow stake 4 not readable. Buried or gone. Will look tomorrow.</span></div>
+      <div><span class="t">02:30</span><span>Aurora, most of an hour, whole southern half. Six of us out on the step. Cold.</span></div>
+      <div><span class="t">— prev —</span><span>Mast guy wire retensioned. Comms nominal since.</span></div>
+      <div><span class="t">— prev —</span><span>Day 214. Nothing to report, which is the good kind of day.</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Standing orders <span class="logged">revised day 61</span></h2>
+    <div class="body">
+      <ul>
+        <li><strong>Colder than −50 °C, or a blizzard warning standing: nobody goes out.</strong> Not for five minutes, not for a photograph.</li>
+        <li>Sign out. Say where. Say when you are back. Take the radio and <em>turn it on</em>.</li>
+        <li>Vents and exhaust intakes are checked every watch. A buried exhaust does not announce itself — it just fills the building.</li>
+        <li>Comms window to the mainland is 21:00–21:40. Outside that we are on our own, which is the normal condition.</li>
+        <li>The generator is the whole building. Anything odd about the sound of it wakes the mech, day or night.</li>
+        <li><strong>An amended return time is signed and timed.</strong> A board nobody can be held to is worse than no board.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>Winter crew <span class="logged">wintering since day 1</span></h2>
+    <div class="body scroll">
+      <table>
+        <tr><th>Name</th><th>Role</th><th>Name</th><th>Role</th></tr>
+        <tr><td>Okonkwo</td><td class="t">station leader</td><td>Nakamura</td><td class="t">chef</td></tr>
+        <tr><td>Reyes</td><td class="t">general technician</td><td>Duclos</td><td class="t">glaciology</td></tr>
+        <tr><td>Lindqvist</td><td class="t">generator mech</td><td>Achterberg</td><td class="t">glaciology</td></tr>
+        <tr><td>Moretti</td><td class="t">meteorology</td><td>Silva</td><td class="t">electrician</td></tr>
+        <tr><td>Bhatt</td><td class="t">comms</td><td>Yun</td><td class="t">data</td></tr>
+        <tr><td>Kowalski</td><td class="t">field guide</td><td>Ferrar</td><td class="t">doctor</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <footer>
+    Haldane Station is not a real place. It is the demonstration world for a college .NET course, and everything
+    above is invented — the crew, the log, the weather. The station is named for the Haldanes, physiologists of
+    dangerous air, which is why the thing most likely to kill you here is a blocked exhaust rather than the cold.
+    <br><br><a href="/about.html">About this station &rarr;</a>
+  </footer>
+
+</div>
+</body>
+</html>
