@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HALDANE STATION · DUTY CONSOLE</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="board.css">
+<script src="board.js" defer></script>
+</head>
+<!--
+  WEEK 6 BOARD = week 5 + one status cell, one log column and one standing order.
+
+  Week 6's demo turns the console's record from a sign-out board into a WATCH
+  LOG: one book, in the order things happened, holding several different kinds
+  of entry. So the log gains a KIND column and starts carrying the sign-outs
+  and the met readings alongside the prose. That is the whole change.
+
+  ⚠️ The log's KIND column is the week made visible, and it is the ONLY new
+  visual element. `.log .kind` is a new class in board.css rather than a change
+  to an existing one, so weeks 1-5 render exactly as they always did.
+
+  ⚠️ The status panel gains "Last reading" because week 6's program stops
+  typing the outside temperature into itself and starts reading it off the most
+  recent MET entry on the log. That is a fact the STATION now keeps.
+
+  ⚠️ NO panel for interfaces, for `is`, or for polymorphism. Those are things
+  the PROGRAM learned, not things the STATION knows.
+
+  ⚠️ Sign-out reasons come from the closed list of six in CLAUDE.md — MET RUN,
+  DIG OUT, FUEL, FIELD, COMMS, WALK. Do not invent a seventh. The log's KINDS
+  are a different list and a shorter one: SIGN OUT, MET, FUEL, NOTE.
+
+  Day 247 — a week on from week 5, and the numbers move with it.
+-->
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="rule" aria-hidden="true">================================================================================================================================================================</div>
+    <h1>HALDANE STATION — DUTY CONSOLE</h1>
+    <div class="sub">nearest neighbour: 512 km · winter crew · day 247 · <span id="clock">--:--:--</span> station time (UTC+5)</div>
+    <div class="rule" aria-hidden="true">================================================================================================================================================================</div>
+  </header>
+
+  <section>
+    <h2>Station status <span class="logged">read off the log · last MET 14:35</span></h2>
+    <div class="grid">
+      <div class="cell"><div class="k">Station</div><div class="v">Haldane</div></div>
+      <div class="cell"><div class="k">On station</div><div class="v">12</div></div>
+      <div class="cell"><div class="k">Outside</div><div class="v cold">−41.5 °C</div></div>
+      <div class="cell"><div class="k">That is</div><div class="v cold">−42.7 °F</div></div>
+      <div class="cell"><div class="k">Blizzard warning</div><div class="v ok">FALSE</div></div>
+      <div class="cell"><div class="k">Safe to go out</div><div class="v ok">TRUE</div></div>
+      <div class="cell"><div class="k">Trips logged today</div><div class="v">4</div></div>
+      <div class="cell"><div class="k">Last reading</div><div class="v">14:35 · Bhatt</div></div>
+    </div>
+    <div class="body sub">
+      Outside is no longer typed into this board. It is whatever the most recent MET entry on the log says, which
+      means the board and the log cannot disagree about it. Everything else here is still updated by hand at each
+      watch change — if any of it disagrees with the instrument, believe the instrument and correct the board.
+    </div>
+  </section>
+
+  <section>
+    <h2>Generator <span class="logged">logged 07:40 · Lindqvist</span></h2>
+    <div class="grid">
+      <div class="cell"><div class="k">Fuel in day tank</div><div class="v">4,300 L</div></div>
+      <div class="cell"><div class="k">Burn rate</div><div class="v">800 L/hr</div></div>
+      <div class="cell"><div class="k">Hours remaining</div><div class="v">5.375</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Signed out <span class="logged">board as at 14:57</span></h2>
+    <div class="body scroll">
+      <table>
+        <tr><th>Time</th><th>Name</th><th>Reason</th><th>Expected</th><th>Amended</th><th>Status</th><th>Trips</th></tr>
+        <tr><td class="t">09:05</td><td>Lindqvist</td><td class="tag">FUEL</td><td class="t">10:30</td><td class="t">—</td><td class="ok">back 10:18</td><td class="t">1</td></tr>
+        <tr><td class="t">14:20</td><td>Okonkwo</td><td class="tag">MET RUN</td><td class="t">15:00</td><td class="t">—</td><td class="ok">on time</td><td class="t">1</td></tr>
+        <tr><td class="t">14:20</td><td>Reyes</td><td class="tag">DIG OUT</td><td class="t">14:45</td><td class="t">—</td><td class="ok">on time</td><td class="t">1</td></tr>
+        <tr><td class="t">14:57</td><td>Moretti</td><td class="tag">WALK</td><td class="t">15:30</td><td class="t">—</td><td class="ok">on time</td><td class="t">1</td></tr>
+      </table>
+    </div>
+    <div class="body sub">
+      Nobody leaves the building without a line on this board. The line is not the paperwork — the line is the
+      reason anyone knows to go and look.
+      <br><br>
+      A return time may be amended by the duty officer and by nobody else, and the amendment is signed. Time out,
+      name and reason are what was written when the person left, and they are not amendable at all. If those are
+      wrong the line is void and a new one is written.
+    </div>
+  </section>
+
+  <section>
+    <h2>Watch log <span class="logged">one book · in the order it happened</span></h2>
+    <div class="body log">
+      <div><span class="t">15:02</span><span class="kind">MET</span><span>−44.0 °C at the masts. Wind backing. Nakamura, on the way in from the store.</span></div>
+      <div><span class="t">14:57</span><span class="kind">SIGN OUT</span><span>Moretti — WALK, flag line, back by 15:30. Radio on.</span></div>
+      <div><span class="t">14:35</span><span class="kind">MET</span><span>−41.5 °C. Snow stake 4 readable again, 61 cm. Bhatt.</span></div>
+      <div><span class="t">14:20</span><span class="kind">SIGN OUT</span><span>Reyes — DIG OUT, vent 3 drifted over again, back by 14:45.</span></div>
+      <div><span class="t">14:20</span><span class="kind">SIGN OUT</span><span>Okonkwo — MET RUN, masts and de-ice, back by 15:00.</span></div>
+      <div><span class="t">12:00</span><span class="kind">MET</span><span>−39.8 °C. Cloud thinning to the south. Moretti.</span></div>
+      <div><span class="t">11:40</span><span class="kind">NOTE</span><span>Nakamura reports the mess kettle is making the noise again.</span></div>
+      <div><span class="t">10:18</span><span class="kind">NOTE</span><span>Lindqvist back in. No ice in the filter, drum 7 broached.</span></div>
+      <div><span class="t">09:05</span><span class="kind">SIGN OUT</span><span>Lindqvist — FUEL, drums to the day tank, back by 10:30.</span></div>
+      <div><span class="t">07:40</span><span class="kind">FUEL</span><span>Day tank dipped: 4,300 L. Burn steady at 800 L/hr.</span></div>
+      <div><span class="t">02:30</span><span class="kind">NOTE</span><span>Aurora, most of an hour, whole southern half. Six of us out on the step. Cold.</span></div>
+      <div><span class="t">— prev —</span><span class="kind">NOTE</span><span>Day 240. Mast guy wire retensioned. Comms nominal since.</span></div>
+    </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Standing orders <span class="logged">revised day 61</span></h2>
+    <div class="body">
+      <ul>
+        <li><strong>Colder than −50 °C, or a blizzard warning standing: nobody goes out.</strong> Not for five minutes, not for a photograph.</li>
+        <li>Sign out. Say where. Say when you are back. Take the radio and <em>turn it on</em>.</li>
+        <li>Vents and exhaust intakes are checked every watch. A buried exhaust does not announce itself — it just fills the building.</li>
+        <li>Comms window to the mainland is 21:00–21:40. Outside that we are on our own, which is the normal condition.</li>
+        <li>The generator is the whole building. Anything odd about the sound of it wakes the mech, day or night.</li>
+        <li><strong>An amended return time is signed and timed.</strong> A board nobody can be held to is worse than no board.</li>
+        <li><strong>Everything that happens on a watch goes in the one book, in the order it happened.</strong> A sign-out, a reading off the masts and a dip of the day tank are not three different records kept in three different places. They are three lines, and the only thing they have in common is that somebody wrote each one down at a time.</li>
+        <li><strong>Three trips out in a day and the duty officer sends somebody else.</strong> The tally is kept per person, not for the station — a crew of twelve averaging one trip each is an ordinary day, and one person doing all twelve is how people get hurt.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>Winter crew <span class="logged">wintering since day 1</span></h2>
+    <div class="body scroll">
+      <table>
+        <tr><th>Name</th><th>Role</th><th>Name</th><th>Role</th></tr>
+        <tr><td>Okonkwo</td><td class="t">station leader</td><td>Nakamura</td><td class="t">chef</td></tr>
+        <tr><td>Reyes</td><td class="t">general technician</td><td>Duclos</td><td class="t">glaciology</td></tr>
+        <tr><td>Lindqvist</td><td class="t">generator mech</td><td>Achterberg</td><td class="t">glaciology</td></tr>
+        <tr><td>Moretti</td><td class="t">meteorology</td><td>Silva</td><td class="t">electrician</td></tr>
+        <tr><td>Bhatt</td><td class="t">comms</td><td>Yun</td><td class="t">data</td></tr>
+        <tr><td>Kowalski</td><td class="t">field guide</td><td>Ferrar</td><td class="t">doctor</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <footer>
+    Haldane Station is not a real place. It is the demonstration world for a college .NET course, and everything
+    above is invented — the crew, the log, the weather. The station is named for the Haldanes, physiologists of
+    dangerous air, which is why the thing most likely to kill you here is a blocked exhaust rather than the cold.
+    <br><br><a href="/about.html">About this station &rarr;</a>
+  </footer>
+
+</div>
+</body>
+</html>

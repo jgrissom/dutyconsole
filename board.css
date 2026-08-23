@@ -75,6 +75,10 @@ tr:last-child td{border-bottom:none}
 .log div{padding:5px 0;border-bottom:1px solid #171c1f;display:flex;gap:14px}
 .log div:last-child{border-bottom:none}
 .log .t{flex:0 0 auto;min-width:9.5em}
+/* Week 6 on: the log stops being free text and starts being TYPED — every
+ * entry says what kind of thing it is. A new class rather than a change to
+ * .tag, so weeks 1-5's boards render exactly as they always did. */
+.log .kind{flex:0 0 auto;min-width:6em;color:var(--amber)}
 
 ul{margin:0;padding-left:1.1rem} li{margin:.32rem 0}
 
