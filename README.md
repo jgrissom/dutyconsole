@@ -4,7 +4,7 @@ The in-fiction intranet for **Haldane Station**, the demonstration world of a co
 .NET database course. Static site, GitHub Pages, no build step.
 
 > **This is not course material.** Nothing is graded from it, no lab or homework links
-> to it, and no grader or script resolves a path into this repo. It is flavour. The
+> to it, and no grader or script resolves a path into this repo. It is favor. The
 > course itself lives in `dotnet-db-dev` (public) and `dotnet-db-dev-answer-keys`
 > (private) — its authoring rules are in the latter's `CLAUDE.md`.
 

@@ -39,12 +39,12 @@ h2{
 /* The station clock — the only live thing on the console, so it has to read as
  * an instrument rather than as more header text.
  *
- * Deliberately NOT a new colour: amber is the title and `hours remaining`,
- * blue is temperature, green and red are status. A coloured clock would either
+ * Deliberately NOT a new color: amber is the title and `hours remaining`,
+ * blue is temperature, green and red are status. A colored clock would either
  * collide with one of those or read as an alert. It is lifted to normal
  * foreground brightness instead, and the COLONS blink at 1Hz — which is what
  * actually says "running" from the back of a room, where the digits are
- * unreadable anyway and colour tells you nothing. */
+ * unreadable anyway and color tells you nothing. */
 #clock{color:var(--fg);letter-spacing:.06em}
 #clock .sep{animation:blink 1s step-end infinite}
 @keyframes blink{50%{opacity:.2}}
