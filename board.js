@@ -17,9 +17,11 @@
  */
 
 (function () {
-  // Haldane keeps UTC+5, like the real plateau stations at this longitude —
-  // which is hours off from anyone reading this, and quietly says so.
-  var OFFSET_HOURS = 5;
+  // Haldane keeps UTC, which plenty of Antarctic stations do — down there every
+  // meridian is a few hundred meters away, so a local time zone is a choice
+  // rather than a fact. It is hours off from anyone reading this, and quietly
+  // says so. (The duty console program keeps the same clock: DateTime.UtcNow.)
+  var OFFSET_HOURS = 0;
 
   var el = document.getElementById('clock');
   if (!el) return;

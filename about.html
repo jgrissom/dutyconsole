@@ -50,7 +50,7 @@
     <h2>Why a terminal</h2>
     <div class="body prose">
       <p>
-        In the story: the station is five hundred kilometres from anybody. There is no
+        In the story: the station is five hundred kilometers from anybody. There is no
         website out there, no phone, no app, and no second screen. A console in the
         corridor is genuinely the whole interface to the building, so the plainness is
         the setting rather than a limitation.
@@ -88,8 +88,9 @@
     <h2>The clock, and why the numbers look odd</h2>
     <div class="body prose">
       <p>
-        Haldane keeps <strong>UTC+5</strong>, which is what the real stations at that
-        longitude do. Every time on the board is 24-hour — <span class="tag">14:20</span>
+        Haldane keeps <strong>UTC</strong>, which plenty of real stations do — down there
+        every meridian is a few hundred meters away, so a local time zone is a choice
+        rather than a fact. Every time on the board is 24-hour — <span class="tag">14:20</span>
         is twenty past two in the afternoon, and the comms window at
         <span class="tag">21:00</span> is nine in the evening. Nobody at a research
         station writes <em>9&nbsp;PM</em>; too much depends on not misreading it.
@@ -141,9 +142,9 @@
 /* How far ahead of the reader the station is, worked out from their own clock.
  *
  * This page is the ONLY place that addresses the reader directly, which is why
- * the calculation lives here and the boards just say "UTC+5". Reading it live
- * also gets daylight saving right for free — the gap is 10 hours from US
- * Central in summer and 11 in winter, and nothing has to be updated for that.
+ * the calculation lives here and the boards just say "UTC". Reading it live
+ * also gets daylight saving right for free — the gap is 5 hours from US
+ * Central in summer and 6 in winter, and nothing has to be updated for that.
  *
  * Half-hour and 45-minute zones exist (India is UTC+5:30, Nepal +5:45), so the
  * minutes are kept rather than assumed away.
@@ -152,7 +153,7 @@
   var el = document.getElementById('gap');
   if (!el) return;
 
-  var STATION_MIN = 5 * 60;                       // UTC+5, in minutes
+  var STATION_MIN = 0;                             // UTC, in minutes
   var readerMin = -new Date().getTimezoneOffset(); // JS reports this inverted
   var diff = STATION_MIN - readerMin;
 
